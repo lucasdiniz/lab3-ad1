@@ -1,0 +1,28 @@
+---
+title: "lab3-cp2"
+author: "Lucas Diniz"
+date: "27 de junho de 2017"
+output: html_document
+---
+
+##Segredos escondidos nos departamentos da UFCG
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library('tidyverse')
+library('plotly')
+library('ggplot2')
+
+
+dados = read_csv(file = "ufcg-201704-unidades-academicas-filtradas.csv") 
+
+dados_filtrados <- dados %>% select(cargo = DESCRICAO_CARGO, unidade = UORG_LOTACAO,vinculo = SITUACAO_VINCULO,jornada = JORNADA_DE_TRABALHO,data_cargo = DATA_INGRESSO_CARGOFUNCAO,data_servico_publico = INGRESSO_SERVICOPUBLICO) %>%  mutate(data_cargo = as.Date(data_cargo, "%d/%m/%Y"), unidade_numeric = as.integer(factor(unidade))) 
+
+
+km <- dados_filtrados %>% select(unidade_numeric) %>% kmeans(centers = 2)
+
+
+plot_ly(dados_filtrados, x = ~unidade, color = ~jornada, colors="Set1", mode = "bar") %>% subplot(nrows = 6, shareX = TRUE)
+View(dados_filtrados)
+```

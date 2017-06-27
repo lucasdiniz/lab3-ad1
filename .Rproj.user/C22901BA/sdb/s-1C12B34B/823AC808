@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"lab3-cp2\"\nauthor: \"Lucas Diniz\"\ndate: \"27 de junho de 2017\"\noutput: html_document\n---\n\n##Segredos escondidos nos departamentos da UFCG\n\n```{r setup, include=FALSE}\nknitr::opts_chunk$set(echo = TRUE)\n\nlibrary('tidyverse')\nlibrary('plotly')\nlibrary('ggplot2')\n\n\ndados = read_csv(file = \"ufcg-201704-unidades-academicas-filtradas.csv\") \n\ndados_filtrados <- dados %>% select(cargo = DESCRICAO_CARGO, unidade = UORG_LOTACAO,vinculo = SITUACAO_VINCULO,jornada = JORNADA_DE_TRABALHO,data_cargo = DATA_INGRESSO_CARGOFUNCAO,data_servico_publico = INGRESSO_SERVICOPUBLICO) %>%  mutate(data_cargo = as.Date(data_cargo, \"%d/%m/%Y\"), unidade_numeric = as.integer(factor(unidade))) \n\n\nkm <- dados_filtrados %>% select(unidade_numeric) %>% kmeans(centers = 2)\n\n\nplot_ly(dados_filtrados, x = ~unidade, color = ~jornada, colors=\"Set1\", mode = \"bar\") %>% subplot(nrows = 6, shareX = TRUE)\nView(dados_filtrados)\n```\n",
+    "created" : 1498591082358.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2824851231",
+    "id" : "823AC808",
+    "lastKnownWriteTime" : 1498595892,
+    "last_content_update" : -2147483648,
+    "path" : "~/Área de Trabalho/lab3/lab3-cp2.Rmd",
+    "project_path" : "lab3-cp2.Rmd",
+    "properties" : {
+        "last_setup_crc32" : "C5A175869dc0fb7d",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,6 @@
+"0","km <- dados_filtrados %>% kmeans(centers = 2)
+"
+"2","NAs introduzidos por coerção"
+"2","Error in do_one(nmeth) : 
+  NA/NaN/Inf em chamada de função externa (argumento 1)
+"
